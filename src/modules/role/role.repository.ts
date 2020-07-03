@@ -4,25 +4,25 @@ import { RoleDTO } from './role.dto';
 
 @EntityRepository(RoleEntity)
 export class RoleRepository extends Repository<RoleEntity> {
-  public getList = async (): Promise<RoleEntity[]> => {
+  public async getList(): Promise<RoleEntity[]> {
     return await this.find();
-  };
+  }
 
-  public createRole = async (data: RoleDTO): Promise<RoleEntity> => {
+  public async createRole(data: RoleDTO): Promise<RoleEntity> {
     return await this.save(data);
-  };
+  }
 
-  public getRoleDetail = async (id: number): Promise<RoleEntity> => {
-    return this.findOne({ where: { id } });
-  };
+  public async getRoleDetail(id: number): Promise<RoleEntity> {
+    return await this.findOne({ where: { id } });
+  }
 
-  public updateRole = async (id: number, data: Partial<RoleDTO>): Promise<RoleEntity> => {
+  public async updateRole(id: number, data: Partial<RoleDTO>): Promise<RoleEntity> {
     await this.update({ id }, data);
-    return this.findOne({ id });
-  };
+    return await this.findOne({ id });
+  }
 
-  public deleteRole = async (id: number): Promise<ObjectLiteral> => {
+  public async deleteRole(id: number): Promise<ObjectLiteral> {
     await this.delete({ id });
     return { isDeleted: true };
-  };
+  }
 }

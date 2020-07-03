@@ -1,5 +1,6 @@
 import { MigrationInterface, QueryRunner, Table, TableForeignKey } from 'typeorm';
 import { TableName } from '@app/constants/app.enums';
+import { dropFksToTable } from '@app/libs/migrationSupport';
 
 export class createTableUserTeam1593520192923 implements MigrationInterface {
   private userTeamTable: Table = new Table({
@@ -48,6 +49,8 @@ export class createTableUserTeam1593520192923 implements MigrationInterface {
     queryRunner.createForeignKeys(TableName.UserTeam, [this.fkUserId, this.fkTeamId]);
   }
   public async down(queryRunner: QueryRunner): Promise<void> {
+    await dropFksToTable(queryRunner, TableName.User, ['userId', 'teamId']);
+
     queryRunner.dropTable(TableName.UserTeam, true);
   }
 }
