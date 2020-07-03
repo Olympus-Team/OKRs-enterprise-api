@@ -1,9 +1,8 @@
 import { hashSync, compareSync } from 'bcryptjs';
-import { Entity, BaseEntity, PrimaryColumn, Column, BeforeInsert, BeforeUpdate } from 'typeorm';
+import { Entity, BaseEntity, PrimaryColumn, Column, BeforeInsert, BeforeUpdate, ObjectLiteral } from 'typeorm';
 import { TableName } from '@app/constants/app.enums';
-import { UserToken, JwtPayload } from '@app/constants/app.interfaces';
-import { createJWT } from '@app/libs/jwt';
 import { _salt } from '@app/constants/app.config';
+import { UserResponse } from '@app/modules/auth/auth.interface';
 
 @Entity({ name: TableName.User })
 export class UserEntity extends BaseEntity {
@@ -52,17 +51,16 @@ export class UserEntity extends BaseEntity {
     }
   }
 
-  async verifyPassword(inputPassword: string): Promise<boolean> {
+  async comparePassword(inputPassword: string): Promise<boolean> {
     return compareSync(inputPassword, this.password);
   }
 
-  generateToken(): UserToken {
-    const expiresIn: number = 30 * 24 * 60 * 60; // 1 month
-    const payload: JwtPayload = { id: this.id };
-    const token = createJWT(payload, expiresIn);
+  public toJSON(): UserResponse {
     return {
-      user: this,
-      token: `Bearer ${token}`,
+      email: this.email,
+      fullName: this.fullName,
+      gravatarUrl: this.gravatarURL ? this.gravatarURL : '',
+      avatarUrl: this.avatarURL ? this.avatarURL : '',
     };
   }
 }

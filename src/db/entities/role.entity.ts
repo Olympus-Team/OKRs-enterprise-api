@@ -1,11 +1,11 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { TableName } from '@app/constants/app.enums';
+import { TableName, RoleEnum } from '@app/constants/app.enums';
 
 @Entity(TableName.Role)
 export class RoleEntity {
   @PrimaryGeneratedColumn()
   public id: number;
 
-  @Column()
+  @Column({ enum: [RoleEnum.ADMIN, RoleEnum.HR, RoleEnum.TEAM_LEADER, RoleEnum.STAFF] })
   public name: string;
 }
