@@ -4,7 +4,7 @@ import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class ValidationPipe implements PipeTransform {
-  private readonly validationError: number = 0;
+  private readonly numberOfError: number = 0;
   private readonly emptyValue: number = 0;
 
   /* eslint  @typescript-eslint/explicit-module-boundary-types: "off" */
@@ -17,7 +17,7 @@ export class ValidationPipe implements PipeTransform {
     }
     const object = plainToClass(metatype, value);
     const errors = await validate(object);
-    if (errors.length > this.validationError) {
+    if (errors.length > this.numberOfError) {
       throw new HttpException(`Validation failed: ${this.formatErrors(errors)}`, HttpStatus.BAD_REQUEST);
     }
     return value;
