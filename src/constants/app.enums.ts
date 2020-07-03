@@ -26,3 +26,10 @@ export enum DbConfig {
   DB_NAME = 'DB_NAME',
   DB_PORT = 'DB_PORT',
 }
+
+export enum RoleEnum {
+  ADMIN = 'ADMIN',
+  HR = 'HR',
+  TEAM_LEADER = 'TEAM_LEADER',
+  STAFF = 'STAFF',
+}

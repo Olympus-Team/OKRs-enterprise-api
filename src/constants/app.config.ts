@@ -16,3 +16,8 @@ export const isProdMode = Object.is(environment, 'production');
 
 const SALT_WORK_FACTORY = accessEnv('SALT_WORK_FACTORY');
 export const _salt = genSaltSync(+SALT_WORK_FACTORY);
+
+export const passwordValidation = {
+  regex: /^(?=.*\d)[0-9a-zA-Z]{8,}$/,
+  message: 'Should contain at least 1 digit and 8 characters',
+};

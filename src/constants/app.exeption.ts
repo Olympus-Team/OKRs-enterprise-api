@@ -9,3 +9,7 @@ export const EX_IS_NOT_AUTHENTICATED = {
   message: `Not authenticated`,
   statusCode: HttpStatus.UNAUTHORIZED,
 };
+
+export const EX_INVALID_CREDENTIALS = {
+  message: 'Invalid credentials',
+};
