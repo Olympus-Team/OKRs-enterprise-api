@@ -21,3 +21,7 @@ export const passwordValidation = {
   regex: /^(?=.*\d)[0-9a-zA-Z]{8,}$/,
   message: 'Should contain at least 1 digit and 8 characters',
 };
+
+export const ROLE_KEY = 'roles';
+export const EX_MISSING_AUTHENTICATION_GUARD =
+  'Could not find user under execution context. Please make sure AuthenticationGuard are defined first.';

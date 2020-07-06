@@ -1,3 +1,4 @@
+import { createHash } from 'crypto';
 import { hashSync, compareSync } from 'bcryptjs';
 import { Entity, Column, BeforeInsert, BeforeUpdate, PrimaryGeneratedColumn } from 'typeorm';
 import { TableName } from '@app/constants/app.enums';
@@ -49,18 +50,25 @@ export class UserEntity {
   public updatedAt: Date;
 
   @BeforeInsert()
-  async hashPassword(): Promise<void> {
+  public async hashPassword(): Promise<void> {
     this.password = hashSync(this.password, _salt);
   }
 
+  @BeforeInsert()
+  public async generateGravatar(): Promise<void> {
+    const md5 = createHash('md5').update(this.email).digest('hex');
+    const size = 200;
+    this.gravatarURL = `https://gravatar.com/avatar/${md5}?s=${size}&d=retro`;
+  }
+
   @BeforeUpdate()
-  async updateHashPassword(): Promise<void> {
+  public async updateHashPassword(): Promise<void> {
     if (this.password !== this.password) {
       this.password = hashSync(this.password, _salt);
     }
   }
 
-  async comparePassword(inputPassword: string): Promise<boolean> {
+  public async comparePassword(inputPassword: string): Promise<boolean> {
     return compareSync(inputPassword, this.password);
   }
 
