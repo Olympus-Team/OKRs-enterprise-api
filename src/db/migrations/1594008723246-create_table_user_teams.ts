@@ -1,8 +1,8 @@
 import { MigrationInterface, QueryRunner, Table, TableForeignKey } from 'typeorm';
-import { TableName } from '@app/constants/app.enums';
+import { TableName, ForeignKey } from '@app/constants/app.enums';
 import { dropFksToTable } from '@app/libs/migrationSupport';
 
-export class createTableUserTeam1593520192923 implements MigrationInterface {
+export class CreateTableUserTeams1594008723246 implements MigrationInterface {
   private userTeamTable: Table = new Table({
     name: TableName.UserTeam,
     columns: [
@@ -17,40 +17,38 @@ export class createTableUserTeam1593520192923 implements MigrationInterface {
         type: 'bool',
       },
       {
-        name: 'userId',
+        name: ForeignKey.USER_ID,
         type: 'integer',
       },
       {
-        name: 'teamId',
+        name: ForeignKey.TEAM_ID,
         type: 'integer',
       },
     ],
   });
 
-  // Create ForeignKey: userId
-  private fkUserId: TableForeignKey = new TableForeignKey({
-    columnNames: ['userId'],
+  private pkUserId: TableForeignKey = new TableForeignKey({
+    columnNames: [ForeignKey.USER_ID],
     referencedColumnNames: ['id'],
     referencedTableName: TableName.User,
     onDelete: 'CASCADE',
   });
-
-  // Create ForeignKey: teamId
-  private fkTeamId: TableForeignKey = new TableForeignKey({
-    columnNames: ['teamId'],
+  private pkTeamId: TableForeignKey = new TableForeignKey({
+    columnNames: [ForeignKey.TEAM_ID],
     referencedColumnNames: ['id'],
     referencedTableName: TableName.Teams,
     onDelete: 'CASCADE',
   });
+  private tableForeignKey: TableForeignKey[] = [this.pkUserId, this.pkTeamId];
 
   public async up(queryRunner: QueryRunner): Promise<void> {
-    queryRunner.createTable(this.userTeamTable, true);
+    await queryRunner.createTable(this.userTeamTable, true);
 
-    queryRunner.createForeignKeys(TableName.UserTeam, [this.fkUserId, this.fkTeamId]);
+    await queryRunner.createForeignKeys(TableName.UserTeam, this.tableForeignKey);
   }
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await dropFksToTable(queryRunner, TableName.User, ['userId', 'teamId']);
+    await dropFksToTable(queryRunner, TableName.User, [ForeignKey.USER_ID, ForeignKey.TEAM_ID]);
 
-    queryRunner.dropTable(TableName.UserTeam, true);
+    await queryRunner.dropTable(TableName.UserTeam, true);
   }
 }

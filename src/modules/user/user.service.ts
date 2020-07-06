@@ -45,4 +45,12 @@ export class UserService {
 
     return this.userRepository.getUserByConditions(id);
   }
+
+  /**
+   * Author: QuangNV
+   * Reject Request
+   */
+  public async rejectRequest(id: number): Promise<ObjectLiteral> {
+    return await this.userRepository.delete({ id });
+  }
 }

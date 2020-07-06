@@ -9,7 +9,7 @@ export class RoleService {
   constructor(private roleRepository: RoleRepository) {}
 
   public getListRole(): Promise<RoleEntity[]> {
-    return this.roleRepository.find();
+    return this.roleRepository.getList();
   }
 
   public createRole(data: RoleDTO): Promise<RoleEntity> {

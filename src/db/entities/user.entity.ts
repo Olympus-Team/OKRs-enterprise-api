@@ -1,12 +1,12 @@
 import { hashSync, compareSync } from 'bcryptjs';
-import { Entity, BaseEntity, PrimaryColumn, Column, BeforeInsert, BeforeUpdate, ObjectLiteral } from 'typeorm';
+import { Entity, Column, BeforeInsert, BeforeUpdate, PrimaryGeneratedColumn } from 'typeorm';
 import { TableName } from '@app/constants/app.enums';
 import { _salt } from '@app/constants/app.config';
 import { UserResponse } from '@app/modules/auth/auth.interface';
 
 @Entity({ name: TableName.User })
-export class UserEntity extends BaseEntity {
-  @PrimaryColumn()
+export class UserEntity {
+  @PrimaryGeneratedColumn()
   public id: number;
 
   @Column()
@@ -38,6 +38,15 @@ export class UserEntity extends BaseEntity {
 
   @Column()
   public isApproved: boolean;
+
+  @Column()
+  public deactivatedAt: Date;
+
+  @Column()
+  public createdAt: Date;
+
+  @Column()
+  public updatedAt: Date;
 
   @BeforeInsert()
   async hashPassword(): Promise<void> {

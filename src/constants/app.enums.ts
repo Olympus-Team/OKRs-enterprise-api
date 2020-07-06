@@ -14,7 +14,7 @@ export enum TableName {
   Feeback = 'feedbacks',
   EvaluationCriteria = 'evaluation_criterias',
   TemplateCheckin = 'template_checkins',
-  FieldCheckin = 'field_checkins',
+  FieldTemplate = 'field_templates',
   UserStar = 'user_stars',
 }
 
@@ -32,4 +32,22 @@ export enum RoleEnum {
   HR = 'HR',
   TEAM_LEADER = 'TEAM_LEADER',
   STAFF = 'STAFF',
+}
+
+export enum ForeignKey {
+  ID = 'id',
+  ROLE_ID = 'roleId',
+  JOB_POSITION_ID = 'jobPositionId',
+  USER_ID = 'userId',
+  TEAM_ID = 'teamId',
+  CYCLE_ID = 'cycleId',
+  MEASURE_UNIT_ID = 'measureUnitId',
+  TEMPLATE_ID = 'templateId',
+  TEMPLATE_CHECKIN_ID = 'templateCheckinId',
+  CHECKIN_ID = 'checkinId',
+  EVALUATION_CRITERIA_ID = 'evaluationCriteriaId',
+  OBJECTIVE_ID = 'objectiveId',
+  PARENT_OBJECTIVE_ID = 'parentObjectiveId',
+  ALIGN_OBJECTIVE_ID = 'alignObjectiveId',
+  KEY_RESULTS_ID = 'keyResultId',
 }

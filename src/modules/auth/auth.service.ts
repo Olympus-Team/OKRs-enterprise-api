@@ -37,7 +37,7 @@ export class AuthService {
       const newUser = this.userRepository.create(credentials);
       newUser.password = hashSync(newUser.password, _salt);
       const token = await this.jwtStrategy.createBearerToken(newUser);
-      await newUser.save();
+      await this.userRepository.save(newUser);
       return {
         ...newUser.toJSON(),
         token,

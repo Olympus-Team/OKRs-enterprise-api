@@ -8,4 +8,10 @@ export class RoleEntity {
 
   @Column({ enum: [RoleEnum.ADMIN, RoleEnum.HR, RoleEnum.TEAM_LEADER, RoleEnum.STAFF] })
   public name: string;
+
+  @Column()
+  public createdAt: Date;
+
+  @Column()
+  public updatedAt: Date;
 }
