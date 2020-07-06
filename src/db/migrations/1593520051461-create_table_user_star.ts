@@ -1,8 +1,7 @@
 import { MigrationInterface, QueryRunner, Table, TableForeignKey } from 'typeorm';
-import { TableName, ForeignKey } from '@app/constants/app.enums';
-import { dropFksToTable } from '@app/libs/migrationSupport';
+import { TableName } from '@app/constants/app.enums';
 
-export class CreateTableUserStars1594008773951 implements MigrationInterface {
+export class createTableUserStar1593520051461 implements MigrationInterface {
   private userStarTable: Table = new Table({
     name: TableName.UserStar,
     columns: [
@@ -21,28 +20,26 @@ export class CreateTableUserStars1594008773951 implements MigrationInterface {
         type: 'integer',
       },
       {
-        name: ForeignKey.USER_ID,
+        name: 'userId',
         type: 'integer',
       },
     ],
   });
 
-  // Create ForeignKey: userId
+  // Create ForeignKey: jobPositionId
   private pkUserId: TableForeignKey = new TableForeignKey({
-    columnNames: [ForeignKey.USER_ID],
+    columnNames: ['userId'],
     referencedColumnNames: ['id'],
     referencedTableName: TableName.User,
     onDelete: 'CASCADE',
   });
 
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.createTable(this.userStarTable, true);
+    queryRunner.createTable(this.userStarTable, true);
 
-    await queryRunner.createForeignKey(TableName.UserStar, this.pkUserId);
+    queryRunner.createForeignKey(TableName.UserStar, this.pkUserId);
   }
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await dropFksToTable(queryRunner, TableName.UserStar, [ForeignKey.USER_ID]);
-
-    await queryRunner.dropTable(TableName.UserStar, true);
+    queryRunner.dropTable(TableName.UserStar, true);
   }
 }

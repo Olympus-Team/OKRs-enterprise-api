@@ -1,8 +1,8 @@
 import { MigrationInterface, QueryRunner, Table, TableForeignKey } from 'typeorm';
-import { TableName, ForeignKey } from '@app/constants/app.enums';
+import { TableName } from '@app/constants/app.enums';
 import { dropFksToTable } from '@app/libs/migrationSupport';
 
-export class CreateTableUsers1594008685768 implements MigrationInterface {
+export class createTableUsers1593445390980 implements MigrationInterface {
   private usersTable: Table = new Table({
     name: TableName.User,
     columns: [
@@ -60,55 +60,52 @@ export class CreateTableUsers1594008685768 implements MigrationInterface {
         default: false,
       },
       {
-        name: ForeignKey.ROLE_ID,
+        name: 'roleId',
         type: 'integer',
         isNullable: true,
       },
       {
-        name: ForeignKey.JOB_POSITION_ID,
+        name: 'jobPositionId',
         type: 'integer',
+      },
+      {
+        name: 'createdAt',
+        type: 'date',
+        isNullable: false,
+        default: 'now()',
       },
       {
         name: 'deactivatedAt',
         type: 'date',
         isNullable: true,
       },
-      {
-        name: 'createdAt',
-        type: 'timestamp',
-        default: 'now()',
-      },
-      {
-        name: 'updatedAt',
-        type: 'timestamp',
-        default: 'now()',
-      },
     ],
   });
 
-  private pkRoleId: TableForeignKey = new TableForeignKey({
-    columnNames: [ForeignKey.ROLE_ID],
-    referencedColumnNames: ['id'],
-    referencedTableName: TableName.Role,
-    onDelete: 'CASCADE',
-  });
-  private pkobPosId: TableForeignKey = new TableForeignKey({
-    columnNames: [ForeignKey.JOB_POSITION_ID],
-    referencedColumnNames: ['id'],
-    referencedTableName: TableName.JobPosition,
-    onDelete: 'CASCADE',
-  });
-
-  private tableForeignKey: TableForeignKey[] = [this.pkRoleId, this.pkobPosId];
-
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.createTable(this.usersTable, true);
+    queryRunner.createTable(this.usersTable, true);
 
-    await queryRunner.createForeignKeys(TableName.User, this.tableForeignKey);
+    //array of foreignkey in table user
+    const tableforeignkey = [
+      new TableForeignKey({
+        columnNames: ['roleId'],
+        referencedColumnNames: ['id'],
+        referencedTableName: TableName.Role,
+        onDelete: 'CASCADE',
+      }),
+      new TableForeignKey({
+        columnNames: ['jobPositionId'],
+        referencedColumnNames: ['id'],
+        referencedTableName: TableName.JobPosition,
+        onDelete: 'CASCADE',
+      }),
+    ];
+
+    // Create ForeignKey: roleId
+    queryRunner.createForeignKeys(TableName.User, tableforeignkey);
   }
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await dropFksToTable(queryRunner, TableName.User, [ForeignKey.ROLE_ID, ForeignKey.JOB_POSITION_ID]);
-
+    await dropFksToTable(queryRunner, TableName.User, ['roleId', 'jobPositionId']);
     await queryRunner.dropTable(this.usersTable, true);
   }
 }

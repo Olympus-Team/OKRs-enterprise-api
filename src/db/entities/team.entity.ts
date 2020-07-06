@@ -1,7 +1,7 @@
 import { PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
 import { TableName } from '@app/constants/app.enums';
 
-@Entity(TableName.Teams)
+@Entity(TableName.Team)
 export class TeamEntity {
   @PrimaryGeneratedColumn()
   public id: number;

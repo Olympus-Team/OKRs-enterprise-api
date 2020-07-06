@@ -1,13 +1,13 @@
 import { hashSync, compareSync } from 'bcryptjs';
-import { Entity, Column, BeforeInsert, BeforeUpdate, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, BaseEntity, PrimaryColumn, Column, BeforeInsert, BeforeUpdate } from 'typeorm';
 import { TableName } from '@app/constants/app.enums';
 import { UserToken, JwtPayload } from '@app/constants/app.interfaces';
 import { createJWT } from '@app/libs/jwt';
 import { _salt } from '@app/constants/app.config';
 
 @Entity({ name: TableName.User })
-export class UserEntity {
-  @PrimaryGeneratedColumn()
+export class UserEntity extends BaseEntity {
+  @PrimaryColumn()
   public id: number;
 
   @Column()
@@ -39,15 +39,6 @@ export class UserEntity {
 
   @Column()
   public isApproved: boolean;
-
-  @Column()
-  public deactivatedAt: Date;
-
-  @Column()
-  public createdAt: Date;
-
-  @Column()
-  public updatedAt: Date;
 
   @BeforeInsert()
   async hashPassword(): Promise<void> {
