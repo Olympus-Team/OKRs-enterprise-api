@@ -1,14 +1,15 @@
-import { Injectable, InternalServerErrorException, HttpException, UnauthorizedException } from '@nestjs/common';
-import { UserRepository } from '../user/user.repository';
-import { SignInDTO, RegisterDTO } from './auth.dto';
-import { AuthResponse } from './auth.interface';
-import { EX_EMAIL_EXISTS, EX_INVALID_CREDENTIALS } from '@app/constants/app.exeption';
-import { _salt } from '@app/constants/app.config';
 import { hashSync } from 'bcryptjs';
-import { JwtStrategy } from './jwt.strategy';
+import { JwtService } from '@nestjs/jwt';
+import { Injectable, InternalServerErrorException, HttpException, UnauthorizedException } from '@nestjs/common';
+import { _salt } from '@app/constants/app.config';
+import { SignInDTO, RegisterDTO } from './auth.dto';
+import { UserRepository } from '../user/user.repository';
+import { UserEntity } from '@app/db/entities/user.entity';
+import { AuthResponse, JwtPayload } from './auth.interface';
+import { EX_EMAIL_EXISTS, EX_INVALID_CREDENTIALS } from '@app/constants/app.exeption';
 @Injectable()
 export class AuthService {
-  constructor(private userRepository: UserRepository, private jwtStrategy: JwtStrategy) {}
+  constructor(private userRepository: UserRepository, private jwtService: JwtService) {}
 
   public async signIn({ email, password }: SignInDTO): Promise<AuthResponse> {
     try {
@@ -17,7 +18,7 @@ export class AuthService {
       if (!isValidPassword) {
         throw new UnauthorizedException(EX_INVALID_CREDENTIALS.message);
       }
-      const token = await this.jwtStrategy.createBearerToken(user);
+      const token = await this.createBearerToken(user);
       return {
         ...user.toJSON(),
         token,
@@ -27,7 +28,7 @@ export class AuthService {
     }
   }
 
-  async register(credentials: RegisterDTO): Promise<AuthResponse> {
+  public async register(credentials: RegisterDTO): Promise<AuthResponse> {
     try {
       const { email } = credentials;
       const user = await this.userRepository.findOne({ where: { email } });
@@ -36,7 +37,7 @@ export class AuthService {
       }
       const newUser = this.userRepository.create(credentials);
       newUser.password = hashSync(newUser.password, _salt);
-      const token = await this.jwtStrategy.createBearerToken(newUser);
+      const token = await this.createBearerToken(newUser);
       await this.userRepository.save(newUser);
       return {
         ...newUser.toJSON(),
@@ -45,5 +46,24 @@ export class AuthService {
     } catch (error) {
       throw new InternalServerErrorException();
     }
+  }
+
+  public async validateUserFromJwtPayload(payload: JwtPayload): Promise<UserEntity> {
+    try {
+      const { id } = payload;
+      const user = await this.userRepository.findOne({ where: { id } });
+      if (!user) {
+        throw new UnauthorizedException();
+      }
+      return user;
+    } catch (error) {
+      throw new InternalServerErrorException();
+    }
+  }
+
+  private async createBearerToken(user: UserEntity): Promise<string> {
+    const payload: JwtPayload = { id: user.id };
+    const token = await this.jwtService.sign(payload);
+    return `bearer ${token}`;
   }
 }

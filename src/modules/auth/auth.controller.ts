@@ -11,7 +11,7 @@ export class AuthController {
 
   @Post('/register')
   @ApiCreatedResponse({ description: 'User Registration' })
-  @ApiBody({ type: RegisterDTO })
+  // @ApiBody({ type: RegisterDTO })
   async register(@Body(ValidationPipe) credentials: RegisterDTO): Promise<AuthResponse> {
     return await this.authService.register(credentials);
   }
@@ -19,7 +19,7 @@ export class AuthController {
   @Post('/signin')
   @ApiOkResponse({ description: 'User Login' })
   @ApiUnauthorizedResponse({ description: 'Invalid credentials' })
-  @ApiBody({ type: SignInDTO })
+  // @ApiBody({ type: SignInDTO })
   async signIn(@Body('user', ValidationPipe) credentials: SignInDTO): Promise<AuthResponse> {
     return await this.authService.signIn(credentials);
   }

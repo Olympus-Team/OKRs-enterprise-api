@@ -1,33 +1,25 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Strategy, ExtractJwt, VerifiedCallback } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
-import { Strategy, ExtractJwt } from 'passport-jwt';
+import { Injectable, HttpException } from '@nestjs/common';
 import accessEnv from '@app/libs/accessEnv';
-import { UserRepository } from '../user/user.repository';
-import { UserEntity } from '@app/db/entities/user.entity';
+import { AuthService } from './auth.service';
 import { JwtPayload } from './auth.interface';
-import { JwtService } from '@nestjs/jwt';
+import { EX_UNAUTHORIZED } from '@app/constants/app.exeption';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(private userRepository: UserRepository, private jwtService: JwtService) {
+  constructor(private readonly authService: AuthService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: accessEnv('JWT_SECRET'),
     });
   }
 
-  // public async validate(payload: JwtPayload): Promise<UserEntity> {
-  //   const { email } = payload;
-  //   const user = await this.userRepository.findOne({ where: { email } });
-  //   if (!user) {
-  //     throw new UnauthorizedException();
-  //   }
-  //   return user;
-  // }
-
-  public async createBearerToken(user: UserEntity): Promise<string> {
-    const payload: JwtPayload = { id: user.id };
-    const token = await this.jwtService.sign(payload);
-    return `Bearer ${token}`;
+  public async isAuthorized(payload: any | JwtPayload, done: VerifiedCallback): Promise<void> {
+    const user = this.authService.validateUserFromJwtPayload(payload);
+    if (!user) {
+      return done(new HttpException(EX_UNAUTHORIZED.message, EX_UNAUTHORIZED.statusCode));
+    }
+    return done(null, user, payload.iat);
   }
 }
