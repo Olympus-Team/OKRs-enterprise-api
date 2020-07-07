@@ -53,4 +53,8 @@ export class UserService {
   public async rejectRequest(id: number): Promise<ObjectLiteral> {
     return await this.userRepository.delete({ id });
   }
+
+  public async getAllUser(): Promise<UserEntity[]> {
+    return await this.userRepository.getAllUser();
+  }
 }

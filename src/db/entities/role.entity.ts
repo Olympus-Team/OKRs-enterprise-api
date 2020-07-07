@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { TableName, RoleEnum } from '@app/constants/app.enums';
+import { UserEntity } from './user.entity';
 
 @Entity(TableName.Role)
 export class RoleEntity {
@@ -14,4 +15,7 @@ export class RoleEntity {
 
   @Column()
   public updatedAt: Date;
+
+  @OneToMany(() => UserEntity, (user) => user.role)
+  users: UserEntity[];
 }

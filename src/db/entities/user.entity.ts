@@ -1,9 +1,11 @@
 import { createHash } from 'crypto';
 import { hashSync, compareSync } from 'bcryptjs';
-import { Entity, Column, BeforeInsert, BeforeUpdate, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, BeforeInsert, BeforeUpdate, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { TableName } from '@app/constants/app.enums';
 import { _salt } from '@app/constants/app.config';
 import { UserResponse } from '@app/modules/auth/auth.interface';
+import { RoleEntity } from './role.entity';
+import { JobEntity } from './job.entity';
 
 @Entity({ name: TableName.User })
 export class UserEntity {
@@ -39,6 +41,12 @@ export class UserEntity {
 
   @Column()
   public isApproved: boolean;
+
+  @ManyToOne(() => RoleEntity, (role) => role.users)
+  role: RoleEntity;
+
+  @ManyToOne(() => JobEntity, (jobPosition) => jobPosition.users)
+  jobPosition: JobEntity;
 
   @Column()
   public deactivatedAt: Date;
