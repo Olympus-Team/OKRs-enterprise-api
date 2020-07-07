@@ -1,14 +1,16 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, UsePipes } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { RoleDTO } from './role.dto';
 import { RoleEntity } from '@app/db/entities/role.entity';
+import { ValidationPipe } from '@app/shared/pipes/validation.pipe';
 
 @Controller('roles')
 export class RoleController {
   constructor(private roleService: RoleService) {}
 
   @Post()
-  private createRole(@Body() role: RoleDTO): Promise<RoleEntity> {
+  @UsePipes(new ValidationPipe())
+  public createRole(@Body() role: RoleDTO): Promise<RoleEntity> {
     return this.roleService.createRole(role);
   }
 

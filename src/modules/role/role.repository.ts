@@ -9,7 +9,9 @@ export class RoleRepository extends Repository<RoleEntity> {
   }
 
   public async createRole(data: RoleDTO): Promise<RoleEntity> {
-    return await this.save(data);
+    const final_data = await this.save(data);
+
+    return final_data;
   }
 
   public async getRoleDetail(id: number): Promise<RoleEntity> {
@@ -24,5 +26,9 @@ export class RoleRepository extends Repository<RoleEntity> {
   public async deleteRole(id: number): Promise<ObjectLiteral> {
     await this.delete({ id });
     return { isDeleted: true };
+  }
+
+  public hihi(): string {
+    return 'asfsdfsfsdf';
   }
 }

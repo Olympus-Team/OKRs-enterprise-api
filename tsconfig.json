@@ -13,8 +13,12 @@
     "incremental": true,
     "allowJs": true,
     "paths": {
-      "@app": ["./"],
-      "@app/*": ["./*"]
+      "@app": [
+        "./"
+      ],
+      "@app/*": [
+        "./*"
+      ]
     }
   },
   "include": [
@@ -27,8 +31,13 @@
     "jest.config.js",
     "webpack-hmr.config.js"
   ],
-  "exclude": ["node_modules", "dist"],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
   "typeAcquisition": {
-    "include": ["jest"]
+    "include": [
+      "jest"
+    ]
   }
 }

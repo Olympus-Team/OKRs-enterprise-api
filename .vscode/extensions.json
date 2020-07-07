@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "CoenraadS.bracket-pair-colorizer",
+    "christian-kohler.path-intellisense",
+    "dbaeumer.vscode-eslint",
+    "dsznajder.es7-react-js-snippets",
+    "eamodio.gitlens",
+    "esbenp.prettier-vscode",
+    "mikestead.dotenv",
+    "ms-azuretools.vscode-docker",
+    "redhat.vscode-yaml",
+    "vscode-icons-team.vscode-icons"
+  ]
+}
