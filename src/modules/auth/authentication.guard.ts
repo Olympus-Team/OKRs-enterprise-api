@@ -9,7 +9,7 @@ export class AuthenticationGuard extends AuthGuard('jwt') {
     return super.canActivate(context);
   }
 
-  handleRequest<T = UserEntity>(err: Error, user?: T): T {
+  public handleRequest<T = UserEntity>(err: Error, user?: T): T {
     if (err || !user) {
       throw err || new UnauthorizedException();
     }

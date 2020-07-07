@@ -1,13 +1,14 @@
 import accessEnv from '@app/libs/accessEnv';
 import { genSaltSync } from 'bcryptjs';
+import { MN_Rate_Limit_WindowMs, MN_Rate_Limit_Max } from './app.magic-number';
 
 /**
- * Interval time 1 hour (60 * 60 * 1000 ms)
+ * Interval time 1 hour
  * Up to 5000 requests per ip
  */
 export const API_REQUEST_RATE_LIMIT = {
-  windowMs: 60 * 60 * 1000,
-  max: 5000,
+  windowMs: MN_Rate_Limit_WindowMs,
+  max: MN_Rate_Limit_Max,
 };
 
 export const environment = accessEnv('NODE_ENV');
@@ -23,5 +24,3 @@ export const passwordValidation = {
 };
 
 export const ROLE_KEY = 'roles';
-export const EX_MISSING_AUTHENTICATION_GUARD =
-  'Could not find user under execution context. Please make sure AuthenticationGuard are defined first.';

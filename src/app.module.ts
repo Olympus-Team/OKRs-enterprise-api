@@ -26,10 +26,6 @@ import { TeamModule } from './modules/team/team.module';
   providers: [AppService],
 })
 export class AppModule implements NestModule {
-  static port: number | string;
-  constructor() {
-    AppModule.port = accessEnv('SERVER_PORT');
-  }
   public configure(consumer: MiddlewareConsumer): MiddlewareConsumer {
     return consumer.apply(CorsMiddleware, RateLimitMiddleware, OriginMiddleware).forRoutes('*');
   }

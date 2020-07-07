@@ -56,9 +56,9 @@ export class UserEntity {
 
   @BeforeInsert()
   public async generateGravatar(): Promise<void> {
-    const md5 = createHash('md5').update(this.email).digest('hex');
+    const sha512 = createHash('sha512').update(this.email).digest('hex');
     const size = 200;
-    this.gravatarURL = `https://gravatar.com/avatar/${md5}?s=${size}&d=retro`;
+    this.gravatarURL = `https://gravatar.com/avatar/${sha512}?s=${size}&d=retro`;
   }
 
   @BeforeUpdate()
