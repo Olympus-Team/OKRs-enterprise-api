@@ -1,6 +1,5 @@
 import { RoleController } from '@app/modules/role/role.controller';
 import { RoleService } from '@app/modules/role/role.service';
-import { RoleDTO } from '@app/modules/role/role.dto';
 import { RoleRepository } from '@app/modules/role/role.repository';
 import { RoleEntity } from '@app/db/entities/role.entity';
 
