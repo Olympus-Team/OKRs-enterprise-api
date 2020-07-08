@@ -43,10 +43,10 @@ export class UserEntity {
   public isApproved: boolean;
 
   @ManyToOne(() => RoleEntity, (role) => role.users)
-  role: RoleEntity;
+  public role: RoleEntity;
 
   @ManyToOne(() => JobEntity, (jobPosition) => jobPosition.users)
-  jobPosition: JobEntity;
+  public jobPosition: JobEntity;
 
   @Column()
   public deactivatedAt: Date;

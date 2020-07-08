@@ -1,2 +1,2 @@
-export const MN_Rate_Limit_WindowMs = 3600000;
-export const MN_Rate_Limit_Max = 5000;
+export const rateLimitWindowMs = 3600000;
+export const rateLimitMax = 5000;

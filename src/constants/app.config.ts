@@ -1,14 +1,14 @@
 import accessEnv from '@app/libs/accessEnv';
 import { genSaltSync } from 'bcryptjs';
-import { MN_Rate_Limit_WindowMs, MN_Rate_Limit_Max } from './app.magic-number';
+import { rateLimitWindowMs, rateLimitMax } from './app.magic-number';
 
 /**
  * Interval time 1 hour
  * Up to 5000 requests per ip
  */
 export const API_REQUEST_RATE_LIMIT = {
-  windowMs: MN_Rate_Limit_WindowMs,
-  max: MN_Rate_Limit_Max,
+  windowMs: rateLimitWindowMs,
+  max: rateLimitMax,
 };
 
 export const environment = accessEnv('NODE_ENV');
