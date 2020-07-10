@@ -75,7 +75,7 @@
     "@ls-lint/ls-lint": "^1.9.0",
     "@nestjs/cli": "^7.0.0",
     "@nestjs/schematics": "^7.0.0",
-    "@nestjs/testing": "^7.0.0",
+    "@nestjs/testing": "^7.3.2",
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.3",
     "@types/faker": "^4.1.12",
