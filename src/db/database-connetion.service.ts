@@ -8,6 +8,7 @@ import { UserEntity } from './entities/user.entity';
 import { JobEntity } from './entities/job.entity';
 import { TeamEntity } from './entities/team.entity';
 import { UserTeamEntity } from './entities/user-team.entity';
+import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
 const type = DbConfig.DB_TYPE;
 const host = accessEnv(DbConfig.DB_HOST);
@@ -19,6 +20,17 @@ const database = accessEnv(DbConfig.DB_NAME);
 @Injectable()
 export class DatabaseConnectionService implements TypeOrmOptionsFactory {
   createTypeOrmOptions(): TypeOrmModuleOptions {
+    return {
+      ...DatabaseConnectionService.createTypeOrmOptions(),
+    };
+  }
+  public static createTypeOrmOptions(): TypeOrmModuleOptions {
+    return {
+      ...DatabaseConnectionService.postgresOrmOptions(),
+      keepConnectionAlive: true,
+    };
+  }
+  public static postgresOrmOptions(): PostgresConnectionOptions {
     return {
       type,
       port,
@@ -35,7 +47,6 @@ export class DatabaseConnectionService implements TypeOrmOptionsFactory {
       dropSchema: false,
       logging: isDevMode ? true : false,
       synchronize: false,
-      keepConnectionAlive: true,
     };
   }
 }

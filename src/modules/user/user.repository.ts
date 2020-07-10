@@ -1,5 +1,4 @@
 import { Repository, EntityRepository, ObjectLiteral, FindOneOptions } from 'typeorm';
-
 import { UserEntity } from '@app/db/entities/user.entity';
 import { RegisterDTO } from '../auth/auth.dto';
 
@@ -14,7 +13,7 @@ export class UserRepository extends Repository<UserEntity> {
   }
 
   public async findUserByEmail(email: string): Promise<UserEntity> {
-    return await this.findOneOrFail({ where: { email } });
+    return await this.findOne({ where: { email } });
   }
 
   public async updateUserById(id: number, user: RegisterDTO): Promise<UserEntity> {

@@ -10,7 +10,6 @@ import {
   UpdateDateColumn,
   CreateDateColumn,
   OneToMany,
-  JoinColumn,
 } from 'typeorm';
 import { TableName } from '@app/constants/app.enums';
 import { _salt } from '@app/constants/app.config';
@@ -88,6 +87,6 @@ export class UserEntity {
   }
 
   public async comparePassword(inputPassword: string): Promise<boolean> {
-    return compareSync(inputPassword, this.password);
+    return await compareSync(inputPassword, this.password);
   }
 }

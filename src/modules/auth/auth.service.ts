@@ -18,8 +18,7 @@ export class AuthService {
       if (!user.comparePassword(password)) {
         throw new BadRequestException(invalidCredential);
       }
-      const token = await this.createBearerToken(user);
-      return { token };
+      return await this.createBearerToken(user);
     } catch (error) {
       throw new UnauthorizedException(invalidCredential);
     }
@@ -38,7 +37,8 @@ export class AuthService {
     }
   }
 
-  private async createBearerToken(user: UserEntity): Promise<string> {
-    return await this.jwtService.sign({ id: user.id });
+  public async createBearerToken(user: UserEntity): Promise<AuthResponse> {
+    const token = await this.jwtService.sign({ id: user.id });
+    return { token };
   }
 }

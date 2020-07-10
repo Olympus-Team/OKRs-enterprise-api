@@ -2,23 +2,33 @@ import { AuthController } from '../auth.controller';
 import { AuthService } from '../auth.service';
 import { UserService } from '@app/modules/user/user.service';
 import { JwtService, JwtModuleOptions } from '@nestjs/jwt';
-import { UserRepository } from '@app/modules/user/user.repository';
-import { JwtConfig } from '../jwt.config';
 import { AuthResponse } from '../auth.interface';
+import { Connection } from 'typeorm';
+import { DatabaseConnectionService } from '@app/db/database-connetion.service';
+import { defaultJwtModuleOption } from '@app/constants/app.config';
+import { UserRepository } from '@app/modules/user/user.repository';
+import { UserEntity } from '@app/db/entities/user.entity';
 
 describe('RoleController', () => {
   let jwtOption: JwtModuleOptions;
+  let connection: Connection;
   let userRepository: UserRepository;
-
   let authController: AuthController;
   let authService: AuthService;
   let userService: UserService;
   let jwtService: JwtService;
   beforeEach(() => {
-    jwtOption = new JwtConfig().createJwtOptions();
-    userRepository = new UserRepository();
+    jwtOption = {
+      secret: defaultJwtModuleOption.secret,
+      signOptions: {
+        expiresIn: defaultJwtModuleOption.expiresIn,
+      },
+    };
     jwtService = new JwtService(jwtOption);
-    userService = new UserService(userRepository);
+    connection = new Connection(DatabaseConnectionService.postgresOrmOptions());
+    console.log(connection);
+    userRepository = connection.getCustomRepository(UserRepository);
+    userService = new UserService(connection, userRepository);
     authService = new AuthService(userService, jwtService);
     authController = new AuthController(authService, userService);
   });

@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import accessEnv from '@app/libs/accessEnv';
 import { genSaltSync } from 'bcryptjs';
 import { rateLimitWindowMs, rateLimitMax } from './app.magic-number';
@@ -17,6 +18,10 @@ export const isProdMode = Object.is(environment, 'production');
 
 const SALT_WORK_FACTORY = accessEnv('SALT_WORK_FACTORY');
 export const _salt = genSaltSync(+SALT_WORK_FACTORY);
+export const defaultJwtModuleOption = {
+  secret: accessEnv('JWT_SECRET'),
+  expiresIn: 2592000, //# Expires in 2 months,
+};
 
 export const passwordValidation = {
   regex: /^(?=.*\d)[0-9a-zA-Z]{8,}$/,
