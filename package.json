@@ -103,7 +103,7 @@
     "ts-node": "^8.10.2",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.9.6",
-    "webpack-node-externals": "^1.7.2",
+    "webpack-node-externals": "^2.3.0",
     "yorkie": "^2.0.0"
   }
 }
