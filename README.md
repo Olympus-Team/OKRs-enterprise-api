@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ae23ea88127f47e09fdb131cf0d8a9dd)](https://app.codacy.com/gh/Olympus-Team/OKRs-enterprise-api?utm_source=github.com&utm_medium=referral&utm_content=Olympus-Team/OKRs-enterprise-api&utm_campaign=Badge_Grade_Dashboard)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/548555718f5b4f099c33bb35dc09d7c1)](https://www.codacy.com/gh/Olympus-Team/OKRs-enterprise-api?utm_source=github.com&utm_medium=referral&utm_content=Olympus-Team/OKRs-enterprise-api&utm_campaign=Badge_Grade)
 [![DeepScan grade](https://deepscan.io/api/teams/7726/projects/12661/branches/198249/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=7726&pid=12661&bid=198249)
 [![License](https://img.shields.io/github/license/olympus-team/okrs-enterprise-api?color=%237159c1&logo=mit)](https://github.com/olympus-team/okrs-enterprise-api/blob/develop/license)
