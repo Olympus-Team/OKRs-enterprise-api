@@ -2,7 +2,7 @@ import { Seeder, Factory } from 'typeorm-seeding';
 import { Connection } from 'typeorm';
 import { MeasureUnitEntity } from '../entities/measure-unit.entity';
 
-export class MeasureUnitSeeder implements Seeder {
+export class Seeder1004MeasureUnit implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {
     await connection
       .createQueryBuilder()

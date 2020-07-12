@@ -3,7 +3,7 @@ import { Connection } from 'typeorm';
 import { EvaluationCriteriaEntity } from '../entities/evaluation-criteria.entity';
 import { EvaluationCriteriaEnum } from '@app/constants/app.enums';
 
-export class EvaluationCriteriaSeeder implements Seeder {
+export class Seeder1006EvaluationCriteria implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {
     await connection
       .createQueryBuilder()

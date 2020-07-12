@@ -19,12 +19,12 @@ export class CreateTableTemplateCheckins1594008652307 implements MigrationInterf
       },
       {
         name: 'createdAt',
-        type: 'timestamp',
+        type: 'timestamptz',
         default: 'now()',
       },
       {
         name: 'updatedAt',
-        type: 'timestamp',
+        type: 'timestamptz',
         default: 'now()',
       },
     ],

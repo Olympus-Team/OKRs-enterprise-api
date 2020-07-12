@@ -18,13 +18,19 @@ export class CreateTableJobPositions1594008255759 implements MigrationInterface 
         length: '255',
       },
       {
+        name: 'description',
+        type: 'varchar',
+        isNullable: true,
+        length: '255',
+      },
+      {
         name: 'createdAt',
-        type: 'timestamp',
+        type: 'timestamptz',
         default: 'now()',
       },
       {
         name: 'updatedAt',
-        type: 'timestamp',
+        type: 'timestamptz',
         default: 'now()',
       },
     ],

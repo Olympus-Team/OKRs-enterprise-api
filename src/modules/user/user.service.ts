@@ -1,5 +1,5 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { IPaginationOptions, Pagination, paginate } from 'nestjs-typeorm-paginate';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { generate } from 'generate-password';
 import { ObjectLiteral, Connection } from 'typeorm';
 import { hashSync } from 'bcryptjs';

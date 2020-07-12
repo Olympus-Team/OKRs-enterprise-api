@@ -52,7 +52,7 @@ export class CreateTableCheckins1594009182120 implements MigrationInterface {
       },
       {
         name: 'updatedAt',
-        type: 'timestamp',
+        type: 'timestamptz',
         default: 'now()',
       },
     ],

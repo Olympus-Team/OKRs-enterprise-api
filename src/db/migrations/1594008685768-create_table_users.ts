@@ -71,17 +71,17 @@ export class CreateTableUsers1594008685768 implements MigrationInterface {
       },
       {
         name: 'createdAt',
-        type: 'timestamp',
+        type: 'timestamptz',
         default: 'now()',
       },
       {
         name: 'updatedAt',
-        type: 'timestamp',
+        type: 'timestamptz',
         default: 'now()',
       },
       {
         name: 'deactivatedAt',
-        type: 'timestamp',
+        type: 'timestamptz',
         isNullable: true,
       },
     ],

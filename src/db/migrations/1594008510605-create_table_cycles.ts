@@ -28,16 +28,6 @@ export class CreateTableCycles1594008510605 implements MigrationInterface {
         type: 'timestamp',
         isNullable: false,
       },
-      {
-        name: 'createdAt',
-        type: 'timestamp',
-        default: 'now()',
-      },
-      {
-        name: 'updatedAt',
-        type: 'timestamp',
-        default: 'now()',
-      },
     ],
   });
 

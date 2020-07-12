@@ -34,12 +34,12 @@ export class CreateTableRecognitions1594009275111 implements MigrationInterface 
       },
       {
         name: 'createdAt',
-        type: 'timestamp',
+        type: 'timestamptz',
         default: 'now()',
       },
       {
         name: 'updatedAt',
-        type: 'timestamp',
+        type: 'timestamptz',
         default: 'now()',
       },
     ],

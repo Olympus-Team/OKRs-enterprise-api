@@ -10,9 +10,9 @@ export class CycleEntity {
   @Column()
   public name: string;
 
-  @Column({ type: 'timestamp' })
+  @Column({ type: 'timestamptz' })
   public startDate: Date;
 
-  @Column({ type: 'timestamp' })
+  @Column({ type: 'timestamptz' })
   public endDate: Date;
 }

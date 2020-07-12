@@ -24,9 +24,9 @@ export class FeebackEntity {
   @Column()
   public checkinId: number;
 
-  @CreateDateColumn({ type: 'timestamp' })
+  @CreateDateColumn({ type: 'timestamptz' })
   public createdAt: Date;
 
-  @UpdateDateColumn({ type: 'timestamp' })
+  @UpdateDateColumn({ type: 'timestamptz' })
   public updatedAt: Date;
 }

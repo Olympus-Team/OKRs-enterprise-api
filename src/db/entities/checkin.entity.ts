@@ -33,6 +33,6 @@ export class CheckinEntity {
   @Column()
   public keyResultId: number;
 
-  @UpdateDateColumn({ type: 'timestamp' })
+  @UpdateDateColumn({ type: 'timestamptz' })
   public updatedAt: Date;
 }

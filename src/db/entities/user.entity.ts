@@ -44,6 +44,9 @@ export class UserEntity {
   public jobPositionId?: number;
 
   @Column()
+  public roleId: number;
+
+  @Column()
   public isActive: boolean;
 
   @Column()
@@ -52,10 +55,10 @@ export class UserEntity {
   @Column()
   public deactivatedAt: Date;
 
-  @CreateDateColumn({ type: 'timestamp' })
+  @CreateDateColumn({ type: 'timestamptz' })
   public createdAt: Date;
 
-  @UpdateDateColumn({ type: 'timestamp' })
+  @UpdateDateColumn({ type: 'timestamptz' })
   public updatedAt: Date;
 
   @ManyToOne(() => RoleEntity, (role) => role.users)

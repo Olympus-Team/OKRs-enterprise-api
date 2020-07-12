@@ -10,10 +10,13 @@ export class JobEntity {
   @Column()
   public name: string;
 
-  @CreateDateColumn({ type: 'timestamp' })
+  @Column()
+  public description?: string;
+
+  @CreateDateColumn({ type: 'timestamptz' })
   public createdAt: Date;
 
-  @UpdateDateColumn({ type: 'timestamp' })
+  @UpdateDateColumn({ type: 'timestamptz' })
   public updatedAt: Date;
 
   @OneToMany(() => UserEntity, (user) => user.jobPosition)

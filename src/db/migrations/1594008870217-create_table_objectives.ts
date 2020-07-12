@@ -13,12 +13,6 @@ export class CreateTableObjectives1594008870217 implements MigrationInterface {
         isGenerated: true,
       },
       {
-        name: 'type',
-        type: 'varchar',
-        isNullable: false,
-        length: '255',
-      },
-      {
         name: 'progress',
         type: 'integer',
         isNullable: false,

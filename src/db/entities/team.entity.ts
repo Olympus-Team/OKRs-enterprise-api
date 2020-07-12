@@ -9,10 +9,10 @@ export class TeamEntity {
   @Column()
   public name: string;
 
-  @CreateDateColumn({ type: 'timestamp' })
+  @CreateDateColumn({ type: 'timestamptz' })
   public createdAt: Date;
 
-  @UpdateDateColumn({ type: 'timestamp' })
+  @UpdateDateColumn({ type: 'timestamptz' })
   public updatedAt: Date;
 
   @OneToMany(() => UserTeamEntity, (userTeam) => userTeam.team)

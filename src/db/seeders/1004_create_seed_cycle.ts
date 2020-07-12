@@ -2,7 +2,7 @@ import { Seeder, Factory } from 'typeorm-seeding';
 import { Connection } from 'typeorm';
 import { CycleEntity } from '../entities/cycle.entity';
 
-export class CycleSeeder implements Seeder {
+export class Seeder1004Cycle implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {
     await connection
       .createQueryBuilder()
