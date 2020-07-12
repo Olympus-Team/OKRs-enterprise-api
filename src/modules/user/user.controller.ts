@@ -1,47 +1,55 @@
 import { ObjectLiteral } from 'typeorm';
-import { Controller, Post, Body, UsePipes, Put, Param, Get, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, UsePipes, Put, Param, Get, UseGuards, Query } from '@nestjs/common';
 import { UserService } from './user.service';
 import { ResetPasswordDTO, ChangePasswordDTO } from './user.dto';
 import { ValidationPipe } from '@app/shared/pipes/validation.pipe';
 import { AuthenticationGuard } from '../auth/authentication.guard';
 import { CurrentUser } from './user.decorator';
 import { UserEntity } from '@app/db/entities/user.entity';
+import { Pagination } from 'nestjs-typeorm-paginate';
 
 @Controller('/api/v1/users')
 export class UserController {
-  constructor(private userService: UserService) {}
+  constructor(private _userService: UserService) {}
 
   @Get()
-  private getUsers(): Promise<UserEntity[]> {
-    return this.userService.getUsers();
+  public async index(
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 10,
+  ): Promise<Pagination<UserEntity>> {
+    limit = limit > 100 ? 100 : limit;
+    return this._userService.getUsers({
+      page,
+      limit,
+    });
   }
 
   @Get(':id')
-  private getUserDetail(@Param('id') id: number): Promise<UserEntity> {
-    return this.userService.getUserById(id);
+  public async getUserDetail(@Param('id') id: number): Promise<UserEntity> {
+    return this._userService.getUserById(id);
   }
 
   @Get('me')
   @UseGuards(AuthenticationGuard)
-  public me(@CurrentUser() user: UserEntity): UserEntity {
+  public async me(@CurrentUser() user: UserEntity): Promise<UserEntity> {
     return user;
   }
 
   @Post('reset-password')
   @UsePipes(new ValidationPipe())
-  public resetPassword(@Body() user: ResetPasswordDTO): Promise<void> {
-    return this.userService.resetPassword(user);
+  public async resetPassword(@Body() user: ResetPasswordDTO): Promise<void> {
+    return this._userService.resetPassword(user);
   }
 
   @Put('/me/change-password/:id')
   @UsePipes(new ValidationPipe())
-  public changePassword(@Param('id') id: number, @Body() user: ChangePasswordDTO): Promise<ObjectLiteral> {
-    return this.userService.changePassword(id, user);
+  public async changePassword(@Param('id') id: number, @Body() user: ChangePasswordDTO): Promise<ObjectLiteral> {
+    return this._userService.changePassword(id, user);
   }
 
   @Put('reject-request/:id')
   @UsePipes(new ValidationPipe())
-  public rejectRequest(@Param('id') id: number): Promise<ObjectLiteral> {
-    return this.userService.rejectRequest(id);
+  public async rejectRequest(@Param('id') id: number): Promise<ObjectLiteral> {
+    return this._userService.rejectRequest(id);
   }
 }
