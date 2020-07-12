@@ -12,6 +12,7 @@ import { OriginMiddleware } from './shared/middlewares/origin.middleware';
 import { TeamModule } from './modules/team/team.module';
 import { CycleModule } from './modules/cycle/cycle.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { EvaluationCriteriaModule } from './modules/evaluation-criteria/evaluation-criteria.module';
 import { MeasureUnitModule } from './modules/measure-unit/measure-unit.module';
 
 @Module({
@@ -26,6 +27,7 @@ import { MeasureUnitModule } from './modules/measure-unit/measure-unit.module';
     CycleModule,
     AuthModule,
     MeasureUnitModule,
+    EvaluationCriteriaModule,
   ],
   controllers: [AppController],
   providers: [AppService],

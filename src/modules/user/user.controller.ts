@@ -7,6 +7,7 @@ import { AuthenticationGuard } from '../auth/authentication.guard';
 import { CurrentUser } from './user.decorator';
 import { UserEntity } from '@app/db/entities/user.entity';
 import { Pagination } from 'nestjs-typeorm-paginate';
+import { limitPagination, currentPage } from '@app/constants/app.magic-number';
 
 @Controller('/api/v1/users')
 export class UserController {
@@ -14,8 +15,8 @@ export class UserController {
 
   @Get()
   public async getUsers(@Query('page') page: number, @Query('limit') limit: number): Promise<Pagination<UserEntity>> {
-    page = 1;
-    limit = 10;
+    page = page ? page : currentPage;
+    limit = limit ? limit : limitPagination;
     return this._userService.getUsers({
       page,
       limit,

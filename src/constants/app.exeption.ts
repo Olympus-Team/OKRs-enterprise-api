@@ -15,6 +15,11 @@ export const httpUnauthorized = {
   statusCode: HttpStatus.UNAUTHORIZED,
 };
 
+export const httpDatabaseException = {
+  statusCode: HttpStatus.BAD_REQUEST,
+  message: `Exception when handle with database`,
+};
+
 export const invalidCredential = 'Invalid credentials';
 export const missingAuthenticationGuard = `Could not find user under execution context. 
 Please make sure AuthenticationGuard are defined first.`;

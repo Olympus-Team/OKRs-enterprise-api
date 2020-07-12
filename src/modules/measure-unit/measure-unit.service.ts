@@ -10,8 +10,8 @@ import { MeasureUnitDTO } from './measure-unit.dto';
 export class MeasureUnitService {
   constructor(private _measureRepository: MeasureRepository) {}
 
-  public getListMeasureUnit(): Promise<MeasureUnitEntity[]> {
-    return this._measureRepository.getList();
+  public getMeasureUnits(options: IPaginationOptions): Promise<Pagination<MeasureUnitEntity>> {
+    return paginate<MeasureUnitEntity>(this._measureRepository, options);
   }
 
   public createMeasureUnit(data: MeasureUnitDTO): Promise<MeasureUnitEntity> {
@@ -28,8 +28,5 @@ export class MeasureUnitService {
 
   public deleteMeasureUnit(id: number): Promise<ObjectLiteral> {
     return this._measureRepository.deleteMeasureUnit(id);
-  }
-  public getMeasureByPage(options: IPaginationOptions): Promise<Pagination<MeasureUnitEntity>> {
-    return paginate<MeasureUnitEntity>(this._measureRepository, options);
   }
 }

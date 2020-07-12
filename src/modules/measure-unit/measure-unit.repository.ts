@@ -23,7 +23,7 @@ export class MeasureRepository extends Repository<MeasureUnitEntity> {
   }
 
   public async deleteMeasureUnit(id: number): Promise<ObjectLiteral> {
-    await this.delete({ id });
-    return { isDeleted: true };
+    const rowEffected: number = await (await this.delete({ id })).affected;
+    return { isDeleted: rowEffected === 1 ? true : false };
   }
 }
