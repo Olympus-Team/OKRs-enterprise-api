@@ -13,14 +13,13 @@ export class UserController {
   constructor(private _userService: UserService) {}
 
   @Get()
-  public async index(
-    @Query('page') page: number = 1,
-    @Query('limit') limit: number = 10,
-  ): Promise<Pagination<UserEntity>> {
-    limit = limit > 100 ? 100 : limit;
+  public async getUsers(@Query('page') page: number, @Query('limit') limit: number): Promise<Pagination<UserEntity>> {
+    page = 1;
+    limit = 10;
     return this._userService.getUsers({
       page,
       limit,
+      route: '',
     });
   }
 

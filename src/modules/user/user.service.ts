@@ -15,7 +15,6 @@ import { RoleEntity } from '@app/db/entities/role.entity';
 @Injectable()
 export class UserService {
   constructor(private connection: Connection, private _userRepository: UserRepository) {
-    this._userRepository = _userRepository;
     this._userRepository = connection.getCustomRepository(UserRepository);
   }
 

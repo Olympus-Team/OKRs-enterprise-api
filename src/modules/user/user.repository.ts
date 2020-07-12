@@ -1,6 +1,7 @@
 import { Repository, EntityRepository, ObjectLiteral, FindOneOptions } from 'typeorm';
 import { UserEntity } from '@app/db/entities/user.entity';
 import { RegisterDTO } from '../auth/auth.dto';
+import { InternalServerErrorException } from '@nestjs/common';
 
 @EntityRepository(UserEntity)
 export class UserRepository extends Repository<UserEntity> {
@@ -22,8 +23,12 @@ export class UserRepository extends Repository<UserEntity> {
   }
 
   public async deleteUser(id: number): Promise<ObjectLiteral> {
-    await this.delete({ id });
-    return { isDeleted: true };
+    try {
+      const rowEffected: number = await (await this.delete({ id })).affected;
+      return { isDeleted: rowEffected === 1 ? true : false };
+    } catch (error) {
+      throw new InternalServerErrorException();
+    }
   }
 
   public async getUsers(): Promise<UserEntity[]> {
