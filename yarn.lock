@@ -522,10 +522,10 @@
   resolved "https://registry.yarnpkg.com/@ls-lint/ls-lint/-/ls-lint-1.9.0.tgz#fa4637d34526e71aea7e5228426493a113f27d77"
   integrity sha512-F6QJ9MB2qPC8MYQ2qE0+V4yGr7qrL72uxmEwZrazGT/lYk9DkhuE1y3nPV4kqEcW7Cj8iHLQeT9Hsl6ugktoNA==
 
-"@nestjs/cli@^7.0.0":
-  version "7.4.0"
-  resolved "https://registry.yarnpkg.com/@nestjs/cli/-/cli-7.4.0.tgz#15af926464ee7c9dc9d1f2822b1d40d9418e7690"
-  integrity sha512-SMA9k8DWGeMXUhIJAtitG+l2a9IIH0mnsJX5kGhnI890G4yn3d1mFbUCA9rJ9qKc8MpSOEeSDsHzTykr1kUG1w==
+"@nestjs/cli@^7.4.1":
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/@nestjs/cli/-/cli-7.4.1.tgz#8430b906a4fa903efac193d88e9c02150c7a6b3e"
+  integrity sha512-90IWWqDIPX3M0vwkmnZ0Ct/EY2b75DYbsw2ZbVxaj57ASdbajhS7Pxhc7MC/L+07nBge+xMRHvQRoKdcfWHd0w==
   dependencies:
     "@angular-devkit/core" "9.1.9"
     "@angular-devkit/schematics" "9.1.9"
@@ -536,7 +536,7 @@
     chokidar "3.4.0"
     cli-table3 "0.5.1"
     commander "4.1.1"
-    fork-ts-checker-webpack-plugin "5.0.1"
+    fork-ts-checker-webpack-plugin "5.0.4"
     inquirer "7.2.0"
     node-emoji "1.10.0"
     ora "4.0.4"
@@ -3617,10 +3617,10 @@ forever-agent@~0.6.1:
   resolved "https://registry.yarnpkg.com/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
   integrity sha1-+8cfDEGt6zf5bFd60e1C2P2sypE=
 
-fork-ts-checker-webpack-plugin@5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/fork-ts-checker-webpack-plugin/-/fork-ts-checker-webpack-plugin-5.0.1.tgz#21adab94c30340c50dc5a3d36c25d180a8bb29e5"
-  integrity sha512-bys+hPwlPckrSCzNkg0BSUTsCRZWS6qIRiwk+8AjKitLWTqokda0QVImCx/Vm9cL/OGZZUnrFXazsVc99nijKQ==
+fork-ts-checker-webpack-plugin@5.0.4:
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/fork-ts-checker-webpack-plugin/-/fork-ts-checker-webpack-plugin-5.0.4.tgz#92ae758e581239e1e37ddd5a6c9cb955764ef470"
+  integrity sha512-nSEqM3KhAjTf8VmuZym2k6WadIasvXybJExFegqMJDkTrOBOY8yGjsXG2FGFJls3DOHtXKzrr3Bv0ZD1LaM7cA==
   dependencies:
     "@babel/code-frame" "^7.8.3"
     chalk "^2.4.1"
@@ -8233,12 +8233,7 @@ typeorm@^0.2.25:
     yargonaut "^1.1.2"
     yargs "^13.2.1"
 
-typescript@^3.6.4:
-  version "3.9.5"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.5.tgz#586f0dba300cde8be52dd1ac4f7e1009c1b13f36"
-  integrity sha512-hSAifV3k+i6lEoCJ2k6R2Z/rp/H3+8sdmcn5NrS3/3kE7+RyZXm9aqvxWqjEXHAd8b0pShatpcdMTvEdvAJltQ==
-
-typescript@^3.9.6:
+typescript@^3.6.4, typescript@^3.9.6:
   version "3.9.6"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.6.tgz#8f3e0198a34c3ae17091b35571d3afd31999365a"
   integrity sha512-Pspx3oKAPJtjNwE92YS05HQoY7z2SFyOpHo9MqJor3BXAGNaPUs83CuVp9VISFkSjyRfiTpmKuAYGJB7S7hOxw==
