@@ -36,6 +36,7 @@
     "migration:run": "yarn typeorm migration:run",
     "migration:revert": "yarn typeorm migration:revert",
     "seed:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed",
+    "setup:ci": "yarn typeorm schema:drop && yarn setup:db",
     "setup:db": "yarn migration:run && yarn seed:run",
     "seed:role": "yarn seed:run --seed Seeder1002Role",
     "seed:job": "yarn seed:run --seed Seeder1001JobPosition",

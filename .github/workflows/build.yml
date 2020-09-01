@@ -45,17 +45,11 @@ jobs:
       - name: Run Docker compose stack for CI
         run: docker-compose -f docker-compose.yml up -d
 
-      - name: Check running containers
-        run: docker ps -a
+      - name: Check running containers & Check logs flame_db container
+        run: docker ps -a && docker logs flame_db
 
-      - name: Check logs flame_db container
-        run: docker logs flame_db
-
-      - name: Exec in flame_db to set up the database
-        run: |
-          docker-exec -it flame_db /bin/sh
-          yarn setup:db
-          exit
+      - name: Migration DB & Seed data
+        run: yarn setup:ci
 
       - name: Run Unit Test
         run: yarn test:cov
