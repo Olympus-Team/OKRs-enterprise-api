@@ -1,4 +1,4 @@
-name: Code coverage
+name: CI 🔥
 
 on:
   push:
@@ -40,6 +40,24 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install packages
         run: yarn install
+
+      - name: Copy file .env
+        run: cp .env.example .env
+
+      - name: Run Docker compose stack for CI
+        run: docker-compose -f docker-compose.yml up -d
+
+      - name: Check running containers
+        run: docker ps -a
+
+      - name: Check logs flame_db container
+        run: docker logs flame_db
+
+      - name: Exec in flame_db to set up the database
+        run: |
+          docker-exec -it flame_db /bin/sh
+          yarn setup:db
+          exit
 
       - name: Run Unit Test
         run: yarn test:cov
