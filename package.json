@@ -108,7 +108,7 @@
     "chalk": "^4.1.0",
     "conventional-changelog-cli": "^2.0.34",
     "eslint": "7.4.0",
-    "eslint-config-prettier": "^6.10.0",
+    "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-import": "^2.22.0",
     "jest": "26.1.0",
     "lint-staged": "^10.2.11",
